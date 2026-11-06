@@ -29,6 +29,12 @@ END = 2.4
 seg = (TOTAL - END) / len(cards)
 
 
+GRAD = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+_gd = ImageDraw.Draw(GRAD)
+for _y in range(0, 700, 4):
+    _gd.rectangle((0, _y, W, _y + 4), fill=DARK + (int(210 * (1 - _y / 700) ** 1.2),))
+
+
 def frame(t):
     z = 1.0 + 0.10 * (t / TOTAL)
     cw, ch = W / z * (BW / (W * 1.12)) * 1.0, H / z * (BH / (H * 1.12))
@@ -38,11 +44,9 @@ def frame(t):
     ww, hh = BW / 1.12 * k, BH / 1.12 * k
     x0 = (BW - ww) / 2 + 30 * (t / TOTAL); y0 = (BH - hh) / 2
     im = base.resize((W, H), Image.LANCZOS, box=(x0, y0, x0 + ww, y0 + hh)).convert('RGBA')
+    # top gradient (alpha-composited; drawing RGBA fills directly on an RGBA image replaces pixels)
+    im.alpha_composite(GRAD)
     d = ImageDraw.Draw(im, 'RGBA')
-    # top gradient + bottom strip
-    for y in range(0, 700, 4):
-        a = int(210 * (1 - y / 700) ** 1.2)
-        d.rectangle((0, y, W, y + 4), fill=DARK + (a,))
     l = logo.resize((120, 120), Image.LANCZOS)
     im.alpha_composite(l, (W - 175, 90))
     f = F(FB, 30); tag = spec['tag']; tw = d.textlength(tag, font=f); h = 58
