@@ -1,0 +1,9 @@
+{"tag": "ASENWARE · AW-D138",
+ "scenes": [
+  {"type": "hero", "dur": 2.6, "photo": "2026-11/asenware/D138_angle_w.jpg", "kicker": "Հասցեական դետեկտոր", "title": "Ծո՞ւխ, թե՞ ջերմություն", "sub": "Այս դետեկտորը զգում է երկուսն էլ", "spin": 6},
+  {"type": "feature", "dur": 2.4, "photo": "2026-11/asenware/D138_front_w.jpg", "kicker": "01 · Ծուխ", "title": "Օպտիկական խցիկ", "sub": "Հայտնաբերում է ծուխը վաղ փուլում", "spin": -4},
+  {"type": "stat", "dur": 2.6, "photo": "2026-11/asenware/D138_angle_w.jpg", "kicker": "02 · Ջերմություն", "value": 57, "unit": "°C", "sub": "Ֆիքսված ջերմային շեմ", "spin": 4},
+  {"type": "glow", "dur": 2.4, "photo": "2026-11/asenware/D138_front_w.jpg", "kicker": "03 · Ինդիկացիա", "title": "Կարմիր LED՝ 360°", "sub": "Լույսը մնում է վառ, մինչև կայանից վերագործարկեն"},
+  {"type": "badges", "dur": 2.4, "photo": "2026-11/asenware/D138_angle_w.jpg", "kicker": "Համապատասխանություն", "title": "Եվրոպական ստանդարտներ", "badges": ["EN54-5", "EN54-7"]},
+  {"type": "end", "dur": 2.8, "title": "Asenware-ի պաշտոնական ներկայացուցիչը Հայաստանում", "phone": "+374 96 112141", "web": "www.telp112.am"}
+ ]}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:NSA;src:url(fonts/noto-sans-armenian-armenian-400-normal.woff2);font-weight:400}
+@font-face{font-family:NSA;src:url(fonts/noto-sans-armenian-armenian-500-normal.woff2);font-weight:500}
+@font-face{font-family:NSA;src:url(fonts/noto-sans-armenian-armenian-700-normal.woff2);font-weight:700}
+@font-face{font-family:NSA;src:url(fonts/noto-sans-armenian-armenian-900-normal.woff2);font-weight:900}
+@font-face{font-family:NSL;src:url(fonts/noto-sans-armenian-latin-400-normal.woff2);font-weight:400}
+@font-face{font-family:NSL;src:url(fonts/noto-sans-armenian-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:NSL;src:url(fonts/noto-sans-armenian-latin-900-normal.woff2);font-weight:900}
+:root{--red:#A51D1D;--red2:#E24848;--dark:#111113;--ink:#1b1b1f;--mute:#6b6b74}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#EEEEF1;font-family:NSL,NSA,sans-serif;color:var(--ink)}
+#stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1500px 1500px at 50% 62%,#ffffff 0%,#ffffff 60%,#ececf0 100%)}
+.grid{display:none;position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(closest-side,#000,transparent)}
+.brandbar{position:absolute;left:72px;top:96px;display:flex;align-items:center;gap:18px;font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--red)}
+.brandbar i{display:block;width:44px;height:6px;background:var(--red);border-radius:3px}
+.logo{position:absolute;right:66px;top:70px;width:112px;height:112px}
+.prod{position:absolute;left:50%;top:50%;width:820px;height:820px;margin:-410px 0 0 -410px;will-change:transform}
+.prod img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+.shadow{position:absolute;left:50%;width:560px;height:70px;margin-left:-280px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.22),transparent)}
+.glow{position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none}
+.txt{position:absolute;left:72px;right:72px}
+.kicker{font-weight:700;font-size:34px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
+.h{font-weight:900;font-size:96px;line-height:1.04;letter-spacing:-.01em}
+.sub{font-weight:500;font-size:44px;line-height:1.25;color:var(--mute);margin-top:22px}
+.word{display:inline-block;will-change:transform,opacity}
+.big{font-weight:900;font-size:300px;line-height:.9;color:var(--red);letter-spacing:-.03em}
+.big small{font-size:120px;vertical-align:top;margin-left:6px}
+.badge{display:inline-flex;align-items:center;height:96px;padding:0 40px;border-radius:48px;background:var(--dark);color:#fff;font-weight:700;font-size:44px;margin:0 18px 18px 0}
+.badge b{color:var(--red2);margin-right:14px}
+.line{position:absolute;height:8px;background:var(--red);border-radius:4px}
+.end{position:absolute;inset:0;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}
+.end img{width:260px;height:260px;margin-bottom:56px}
+.end .a{font-weight:700;font-size:46px;line-height:1.3;color:#f3c9c1;padding:0 90px}
+.end .p{font-weight:900;font-size:86px;margin-top:34px;letter-spacing:.01em}
+.end .w{font-weight:500;font-size:38px;margin-top:18px;color:#a9a9b3}
+.flash{position:absolute;inset:0;background:#fff;pointer-events:none}
+.sweep{position:absolute;top:-20%;width:260px;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);transform:rotate(18deg);mix-blend-mode:screen}
+</style></head>
+<body><div id="stage"><div class="grid"></div></div>
+<script>
+const E=(t)=>t<0?0:t>1?1:t; const eo=(t)=>1-Math.pow(1-E(t),3); const eio=(t)=>{t=E(t);return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+const back=(t)=>{t=E(t);const c=1.6;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)};
+let SPEC=null, S=null;
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+function words(text){return text.split(' ').map(w=>`<span class="word">${w}</span>`).join(' ')}
+window.setup=function(spec){
+  SPEC=spec; S=document.getElementById('stage');
+  const bb=el('div','brandbar','<i></i>'+spec.tag); S.appendChild(bb);
+  const lg=el('img','logo'); lg.src=spec.logo; S.appendChild(lg);
+  spec.scenes.forEach((sc,i)=>{
+    const g=el('div','scene'); g.style.cssText='position:absolute;inset:0'; g.dataset.i=i;
+    if(sc.photo){const sh=el('div','shadow'); g.appendChild(sh); const p=el('div','prod'); const im=el('img'); im.src=sc.photo; p.appendChild(im); if(sc.type==='glow'){const gl=el('div','glow');p.appendChild(gl)} g.appendChild(p)}
+    const tx=el('div','txt');
+    if(sc.type==='stat'){tx.innerHTML=`<div class="kicker">${sc.kicker||''}</div><div class="big"><span class="num">0</span><small>${sc.unit||''}</small></div><div class="sub">${sc.sub||''}</div>`}
+    else if(sc.type==='badges'){tx.innerHTML=`<div class="kicker">${sc.kicker||''}</div><div class="h" style="font-size:80px;margin-bottom:40px">${words(sc.title)}</div>`+sc.badges.map(b=>`<span class="badge"><b>●</b>${b}</span>`).join('')}
+    else {tx.innerHTML=`<div class="kicker">${sc.kicker||''}</div><div class="h">${words(sc.title)}</div><div class="sub">${sc.sub||''}</div>`}
+    g.appendChild(tx); const ln=el('div','line'); g.appendChild(ln);
+    if(sc.type==='end'){g.innerHTML=''; const en=el('div','end',`<img src="${spec.logo}"><div class="a">${sc.title}</div><div class="p">${sc.phone}</div><div class="w">${sc.web||''}</div>`); g.appendChild(en)}
+    S.appendChild(g);
+  });
+  const fl=el('div','flash'); S.appendChild(fl);
+  return document.fonts.ready.then(()=>true);
+};
+window.renderAt=function(t){
+  const sc=SPEC.scenes; let acc=0;
+  S.querySelector('.flash').style.opacity=0;
+  sc.forEach((s,i)=>{
+    const g=S.querySelector(`.scene[data-i="${i}"]`); const st=acc, en=acc+s.dur; acc=en;
+    const lt=t-st, d=s.dur, vis=t>=st-0.001 && t<en+0.35;
+    g.style.display=vis?'block':'none'; if(!vis)return;
+    const pin=eo(lt/0.6), pout=eio((lt-(d-0.0))/0.35);
+    g.style.opacity=i===0?1:Math.min(1,E(lt/0.25)); g.style.transform=`translateX(${-pout*1080}px)`; g.style.zIndex=10+i;
+    if(lt>d) g.style.opacity=1-E((lt-d)/0.35);
+    const prod=g.querySelector('.prod'), sh=g.querySelector('.shadow');
+    const layout=s.layout||'bottom';
+    if(prod){
+      let y=layout==='bottom'?300:layout==='right'?260:160, x=layout==='right'?150:0, sc0=layout==='right'?.82:1;
+      const z=sc0*(1.0+0.06*lt/d)*(0.86+0.14*pin); const rot=(s.spin||0)*(lt/d-.5);
+      prod.style.transform=`translate(${x+(1-pin)*(layout==='right'?300:0)}px,${y+(1-pin)*120+Math.sin(lt*2)*8}px) scale(${z}) rotate(${rot}deg)`;
+      prod.style.opacity=pin; prod.style.filter=`blur(${(1-pin)*14}px)`;
+      sh.style.top=(960+y+300*z)+'px'; sh.style.left=`calc(50% + ${x}px)`; sh.style.opacity=pin*.9; sh.style.transform=`scale(${z})`;
+      
+      const gl=prod.querySelector('.glow'); if(gl){const k=.5+.5*Math.sin(lt*6); const r=300+k*60; gl.style.cssText=`position:absolute;left:50%;top:50%;width:${r*2}px;height:${r*2}px;margin:${-r}px 0 0 ${-r}px;border-radius:50%;background:radial-gradient(closest-side,rgba(226,72,72,${.30+.25*k}),rgba(226,72,72,0));mix-blend-mode:multiply`}
+    }
+    const tx=g.querySelector('.txt'); if(tx){
+      tx.style.top=(layout==='right'?520:300)+'px'; if(layout==='right')tx.style.right='520px';
+      const k=tx.querySelector('.kicker'); if(k){k.style.opacity=eo(lt/.4); k.style.transform=`translateY(${(1-eo(lt/.4))*30}px)`}
+      tx.querySelectorAll('.word').forEach((w,j)=>{const p=back((lt-0.15-j*0.09)/0.5); w.style.opacity=E((lt-0.15-j*0.09)/0.25); w.style.transform=`translateY(${(1-p)*70}px)`});
+      const sb=tx.querySelector('.sub'); if(sb){const p=eo((lt-0.55)/0.5); sb.style.opacity=p; sb.style.transform=`translateY(${(1-p)*30}px)`}
+      const nm=tx.querySelector('.num'); if(nm){const p=eo((lt-0.2)/1.2); nm.textContent=Math.round(s.value*p); tx.querySelector('.big').style.transform=`scale(${.9+.1*back((lt-.1)/.6)})`; tx.querySelector('.big').style.transformOrigin='left bottom'}
+      tx.querySelectorAll('.badge').forEach((b,j)=>{const p=back((lt-0.5-j*0.18)/0.45); b.style.opacity=E((lt-0.5-j*0.18)/0.2); b.style.transform=`scale(${.6+.4*p})`});
+    }
+    const ln=g.querySelector('.line'); if(ln){ln.style.left='72px'; ln.style.top=(layout==='right'?470:250)+'px'; ln.style.width=(eo((lt-.05)/.6)*140)+'px'}
+    const ed=g.querySelector('.end'); if(ed){const p=eo(lt/.6); ed.style.opacity=p; const im=ed.querySelector('img'); im.style.transform=`scale(${.7+.3*back(lt/.7)})`; [...ed.children].slice(1).forEach((c,j)=>{const q=eo((lt-.3-j*.15)/.5); c.style.opacity=q; c.style.transform=`translateY(${(1-q)*30}px)`})}
+  });
+};
+</script></body></html>
