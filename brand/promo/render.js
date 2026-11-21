@@ -8,7 +8,7 @@ const fs = require('fs'), path = require('path'), { execSync } = require('child_
   const root = process.cwd();
   const abs = p => 'file://' + path.resolve(root, p);
   spec.logo = abs(spec.logo || 'brand/logo.png');
-  spec.scenes.forEach(s => { if (s.photo) s.photo = abs(s.photo); if (s.icon) s.icon = fs.readFileSync(path.join(__dirname, 'icons', s.icon + '.svg'), 'utf8').replace(/<!--.*?-->/s, ''); });
+  spec.scenes.forEach(s => { if (s.photo) s.photo = abs(s.photo); if (s.bg) s.bg = abs(s.bg); if (s.icon) s.icon = fs.readFileSync(path.join(__dirname, 'icons', s.icon + '.svg'), 'utf8').replace(/<!--.*?-->/s, ''); });
   const total = spec.scenes.reduce((a, s) => a + s.dur, 0);
   const fps = 30, n = Math.round(total * fps);
   const tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'promo-'));

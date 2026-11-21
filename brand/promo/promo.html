@@ -43,6 +43,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#EEEEF1;font-fam
 .ic .ring2{position:absolute;inset:-70px;border-radius:50%;border:3px solid rgba(165,29,29,.12)}
 .ic svg{position:absolute;left:50%;top:50%;width:230px;height:230px;margin:-115px 0 0 -115px;color:#fff;stroke-width:1.6}
 .wm{position:absolute;right:130px;top:820px;font-weight:900;font-size:420px;line-height:1;color:rgba(165,29,29,.06);letter-spacing:-.04em}
+.bgw{position:absolute;inset:0;overflow:hidden;background:#111113}
+.bgw img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+.bgw .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.88) 0%,rgba(10,10,12,.7) 28%,rgba(10,10,12,.1) 55%,rgba(10,10,12,.15) 80%,rgba(10,10,12,.6) 100%)}
+.scene.dark .h{color:#fff}.scene.dark .sub{color:rgba(255,255,255,.82)}.scene.dark .kicker{color:#ff6b6b}
+.scene.dark .line{background:#E24848}
+.brandbar,.logo{z-index:60}
 </style></head>
 <body><div id="stage"><div class="grid"></div></div>
 <script>
@@ -57,6 +63,7 @@ window.setup=function(spec){
   const lg=el('img','logo'); lg.src=spec.logo; S.appendChild(lg);
   spec.scenes.forEach((sc,i)=>{
     const g=el('div','scene'); g.style.cssText='position:absolute;inset:0'; g.dataset.i=i;
+    if(sc.bg){g.classList.add('dark'); const bw=el('div','bgw','<img src="'+sc.bg+'"><div class="ov"></div>'); g.appendChild(bw)}
     if(sc.photo){const sh=el('div','shadow'); g.appendChild(sh); const p=el('div','prod'); const im=el('img'); im.src=sc.photo; p.appendChild(im); if(sc.type==='glow'){const gl=el('div','glow');p.appendChild(gl)} g.appendChild(p)}
     if(sc.icon){ if(sc.num){g.appendChild(el('div','wm',sc.num))} const ic=el('div','ic','<div class="ring2"></div><div class="ring"></div><div class="disc"></div>'+sc.icon); ic.querySelectorAll('path,circle,line,rect,polyline,polygon,ellipse').forEach(x=>x.setAttribute('pathLength','1')); g.appendChild(ic)}
     const tx=el('div','txt');
@@ -73,6 +80,7 @@ window.setup=function(spec){
 window.renderAt=function(t){
   const sc=SPEC.scenes; let acc=0;
   S.querySelector('.flash').style.opacity=0;
+  {let a=0,cur=sc[sc.length-1],ct=0; for(const x of sc){if(t<a+x.dur){cur=x;ct=t-a;break} a+=x.dur} const hide=cur.type==='end'?E(ct/0.3):0; S.querySelector('.brandbar').style.opacity=1-hide; S.querySelector('.logo').style.opacity=1-hide;}
   sc.forEach((s,i)=>{
     const g=S.querySelector(`.scene[data-i="${i}"]`); const st=acc, en=acc+s.dur; acc=en;
     const lt=t-st, d=s.dur, vis=t>=st-0.001 && t<en+0.35;
@@ -80,6 +88,7 @@ window.renderAt=function(t){
     const pin=eo(lt/0.6), pout=eio((lt-(d-0.0))/0.35);
     g.style.opacity=i===0?1:Math.min(1,E(lt/0.25)); g.style.transform=`translateX(${-pout*1080}px)`; g.style.zIndex=10+i;
     if(lt>d) g.style.opacity=1-E((lt-d)/0.35);
+    const bw=g.querySelector('.bgw img'); if(bw){const z=1.12-0.10*E(lt/(d+0.35)); bw.style.transform=`scale(${z}) translate(${(s.pan||0)*E(lt/d)*30}px,${-E(lt/d)*20}px)`}
     const prod=g.querySelector('.prod'), sh=g.querySelector('.shadow');
     const layout=s.layout||'bottom';
     if(prod){
