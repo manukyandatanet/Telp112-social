@@ -37,6 +37,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#EEEEF1;font-fam
 .end .w{font-weight:500;font-size:38px;margin-top:18px;color:#a9a9b3}
 .flash{position:absolute;inset:0;background:#fff;pointer-events:none}
 .sweep{position:absolute;top:-20%;width:260px;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);transform:rotate(18deg);mix-blend-mode:screen}
+.ic{position:absolute;left:50%;top:1270px;width:600px;height:600px;margin:-300px 0 0 -300px}
+.ic .disc{position:absolute;inset:60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d23a3a,#A51D1D 60%,#7e1414);box-shadow:0 40px 80px rgba(165,29,29,.28)}
+.ic .ring{position:absolute;inset:0;border-radius:50%;border:6px solid rgba(165,29,29,.25)}
+.ic .ring2{position:absolute;inset:-70px;border-radius:50%;border:3px solid rgba(165,29,29,.12)}
+.ic svg{position:absolute;left:50%;top:50%;width:260px;height:260px;margin:-130px 0 0 -130px;color:#fff;stroke-width:1.6}
+.wm{position:absolute;right:40px;top:760px;font-weight:900;font-size:520px;line-height:1;color:rgba(165,29,29,.06);letter-spacing:-.04em}
 </style></head>
 <body><div id="stage"><div class="grid"></div></div>
 <script>
@@ -52,6 +58,7 @@ window.setup=function(spec){
   spec.scenes.forEach((sc,i)=>{
     const g=el('div','scene'); g.style.cssText='position:absolute;inset:0'; g.dataset.i=i;
     if(sc.photo){const sh=el('div','shadow'); g.appendChild(sh); const p=el('div','prod'); const im=el('img'); im.src=sc.photo; p.appendChild(im); if(sc.type==='glow'){const gl=el('div','glow');p.appendChild(gl)} g.appendChild(p)}
+    if(sc.icon){ if(sc.num){g.appendChild(el('div','wm',sc.num))} const ic=el('div','ic','<div class="ring2"></div><div class="ring"></div><div class="disc"></div>'+sc.icon); ic.querySelectorAll('path,circle,line,rect,polyline,polygon,ellipse').forEach(x=>x.setAttribute('pathLength','1')); g.appendChild(ic)}
     const tx=el('div','txt');
     if(sc.type==='stat'){tx.innerHTML=`<div class="kicker">${sc.kicker||''}</div><div class="big"><span class="num">0</span><small>${sc.unit||''}</small></div><div class="sub">${sc.sub||''}</div>`}
     else if(sc.type==='badges'){tx.innerHTML=`<div class="kicker">${sc.kicker||''}</div><div class="h" style="font-size:80px;margin-bottom:40px">${words(sc.title)}</div>`+sc.badges.map(b=>`<span class="badge"><b>●</b>${b}</span>`).join('')}
@@ -84,6 +91,10 @@ window.renderAt=function(t){
       
       const gl=prod.querySelector('.glow'); if(gl){const k=.5+.5*Math.sin(lt*6); const r=300+k*60; gl.style.cssText=`position:absolute;left:50%;top:50%;width:${r*2}px;height:${r*2}px;margin:${-r}px 0 0 ${-r}px;border-radius:50%;background:radial-gradient(closest-side,rgba(226,72,72,${.30+.25*k}),rgba(226,72,72,0));mix-blend-mode:multiply`}
     }
+    const ic=g.querySelector('.ic'); if(ic){const p=back((lt-.15)/.6); ic.style.transform=`scale(${.5+.5*p}) translateY(${Math.sin(lt*2)*10}px)`; ic.style.opacity=E((lt-.15)/.3);
+      const dr=eo((lt-.35)/.9); ic.querySelectorAll('svg *').forEach(x=>{x.style.strokeDasharray=1; x.style.strokeDashoffset=1-dr});
+      const r1=ic.querySelector('.ring'), r2=ic.querySelector('.ring2'); r1.style.transform=`scale(${1+.04*Math.sin(lt*3)})`; r2.style.transform=`scale(${.9+.1*eo(lt/1.2)})`; r2.style.opacity=eo(lt/1.2)}
+    const wm=g.querySelector('.wm'); if(wm){const p=eo((lt-.1)/.8); wm.style.opacity=p; wm.style.transform=`translateX(${(1-p)*120}px)`}
     const tx=g.querySelector('.txt'); if(tx){
       tx.style.top=(layout==='right'?520:300)+'px'; if(layout==='right')tx.style.right='520px';
       const k=tx.querySelector('.kicker'); if(k){k.style.opacity=eo(lt/.4); k.style.transform=`translateY(${(1-eo(lt/.4))*30}px)`}

@@ -1,0 +1,9 @@
+{"tag": "ASENWARE · AW-FP200",
+ "scenes": [
+  {"type": "hero", "dur": 2.6, "photo": "2026-11/asenware/FP200_front_w.jpg", "kicker": "Հասցեական կայան", "title": "Համակարգի «ուղեղը»", "sub": "Բոլոր դետեկտորներն ու ազդարարիչները՝ մեկ կայանում", "spin": 3},
+  {"type": "feature", "dur": 2.4, "photo": "2026-11/asenware/FP200_wireless_w.jpg", "kicker": "01 · Կառավարում", "title": "7\" սենսորային էկրան", "sub": "Էկրան և կոճակներ՝ հարմար աշխատանքի համար", "spin": -3},
+  {"type": "stat", "dur": 2.6, "photo": "2026-11/asenware/FP200_front_w.jpg", "kicker": "02 · Մասշտաբ", "value": 2000, "unit": "", "sub": "Լարային սարք՝ 8 շղթա × 250", "spin": 3},
+  {"type": "stat", "dur": 2.4, "photo": "2026-11/asenware/FP200_wireless_w.jpg", "kicker": "03 · Անլար", "value": 1600, "unit": "", "sub": "Անլար սարք՝ նույն կայանին", "spin": -3},
+  {"type": "badges", "dur": 2.4, "photo": "2026-11/asenware/FP200_front_w.jpg", "kicker": "Համապատասխանություն", "title": "999 իրադարձության պատմություն", "badges": ["EN54-2", "EN54-4"]},
+  {"type": "end", "dur": 2.8, "title": "Asenware-ի պաշտոնական ներկայացուցիչը Հայաստանում", "phone": "+374 96 112141", "web": "www.telp112.am"}
+ ]}
