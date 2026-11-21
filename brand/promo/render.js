@@ -22,7 +22,8 @@ const fs = require('fs'), path = require('path'), { execSync } = require('child_
     await page.screenshot({ path: path.join(tmp, `f${String(i).padStart(4, '0')}.jpg`), type: 'jpeg', quality: 92 });
   }
   await browser.close();
-  execSync(`ffmpeg -v error -y -framerate ${fps} -i ${tmp}/f%04d.jpg -f lavfi -i anullsrc=r=44100:cl=stereo -shortest -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -c:a aac -movflags +faststart ${out}`);
+  execSync(`python3 ${path.join(__dirname, 'sound.py')} ${specPath} ${tmp}/a.wav`);
+  execSync(`ffmpeg -v error -y -framerate ${fps} -i ${tmp}/f%04d.jpg -i ${tmp}/a.wav -shortest -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p -c:a aac -b:a 160k -movflags +faststart ${out}`);
   fs.rmSync(tmp, { recursive: true });
   console.log(out, total + 's', n + ' frames');
 })();

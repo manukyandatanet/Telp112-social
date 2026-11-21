@@ -13,36 +13,36 @@
 html,body{width:1080px;height:1920px;overflow:hidden;background:#EEEEF1;font-family:NSL,NSA,sans-serif;color:var(--ink)}
 #stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(1500px 1500px at 50% 62%,#ffffff 0%,#ffffff 60%,#ececf0 100%)}
 .grid{display:none;position:absolute;inset:0;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(closest-side,#000,transparent)}
-.brandbar{position:absolute;left:72px;top:96px;display:flex;align-items:center;gap:18px;font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--red)}
+.brandbar{position:absolute;left:130px;top:262px;display:flex;align-items:center;gap:18px;font-weight:700;font-size:30px;letter-spacing:.14em;color:var(--red)}
 .brandbar i{display:block;width:44px;height:6px;background:var(--red);border-radius:3px}
-.logo{position:absolute;right:66px;top:70px;width:112px;height:112px}
-.prod{position:absolute;left:50%;top:50%;width:820px;height:820px;margin:-410px 0 0 -410px;will-change:transform}
+.logo{position:absolute;right:130px;top:236px;width:104px;height:104px}
+.prod{position:absolute;left:50%;top:50%;width:700px;height:700px;margin:-350px 0 0 -350px;will-change:transform}
 .prod img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .shadow{position:absolute;left:50%;width:560px;height:70px;margin-left:-280px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.22),transparent)}
 .glow{position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none}
-.txt{position:absolute;left:72px;right:72px}
+.txt{position:absolute;left:130px;right:130px}
 .kicker{font-weight:700;font-size:34px;color:var(--red);letter-spacing:.06em;text-transform:uppercase}
-.h{font-weight:900;font-size:96px;line-height:1.04;letter-spacing:-.01em}
-.sub{font-weight:500;font-size:44px;line-height:1.25;color:var(--mute);margin-top:22px}
+.h{font-weight:900;font-size:84px;line-height:1.04;letter-spacing:-.01em}
+.sub{font-weight:500;font-size:40px;line-height:1.25;color:var(--mute);margin-top:22px}
 .word{display:inline-block;will-change:transform,opacity}
-.big{font-weight:900;font-size:300px;line-height:.9;color:var(--red);letter-spacing:-.03em}
+.big{font-weight:900;font-size:240px;line-height:.9;color:var(--red);letter-spacing:-.03em}
 .big small{font-size:120px;vertical-align:top;margin-left:6px}
 .badge{display:inline-flex;align-items:center;height:96px;padding:0 40px;border-radius:48px;background:var(--dark);color:#fff;font-weight:700;font-size:44px;margin:0 18px 18px 0}
 .badge b{color:var(--red2);margin-right:14px}
 .line{position:absolute;height:8px;background:var(--red);border-radius:4px}
 .end{position:absolute;inset:0;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}
 .end img{width:260px;height:260px;margin-bottom:56px}
-.end .a{font-weight:700;font-size:46px;line-height:1.3;color:#f3c9c1;padding:0 90px}
+.end .a{font-weight:700;font-size:44px;line-height:1.3;color:#f3c9c1;padding:0 140px}
 .end .p{font-weight:900;font-size:86px;margin-top:34px;letter-spacing:.01em}
 .end .w{font-weight:500;font-size:38px;margin-top:18px;color:#a9a9b3}
 .flash{position:absolute;inset:0;background:#fff;pointer-events:none}
 .sweep{position:absolute;top:-20%;width:260px;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);transform:rotate(18deg);mix-blend-mode:screen}
-.ic{position:absolute;left:50%;top:1270px;width:600px;height:600px;margin:-300px 0 0 -300px}
+.ic{position:absolute;left:50%;top:1200px;width:520px;height:520px;margin:-260px 0 0 -260px}
 .ic .disc{position:absolute;inset:60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d23a3a,#A51D1D 60%,#7e1414);box-shadow:0 40px 80px rgba(165,29,29,.28)}
 .ic .ring{position:absolute;inset:0;border-radius:50%;border:6px solid rgba(165,29,29,.25)}
 .ic .ring2{position:absolute;inset:-70px;border-radius:50%;border:3px solid rgba(165,29,29,.12)}
-.ic svg{position:absolute;left:50%;top:50%;width:260px;height:260px;margin:-130px 0 0 -130px;color:#fff;stroke-width:1.6}
-.wm{position:absolute;right:40px;top:760px;font-weight:900;font-size:520px;line-height:1;color:rgba(165,29,29,.06);letter-spacing:-.04em}
+.ic svg{position:absolute;left:50%;top:50%;width:230px;height:230px;margin:-115px 0 0 -115px;color:#fff;stroke-width:1.6}
+.wm{position:absolute;right:130px;top:820px;font-weight:900;font-size:420px;line-height:1;color:rgba(165,29,29,.06);letter-spacing:-.04em}
 </style></head>
 <body><div id="stage"><div class="grid"></div></div>
 <script>
@@ -83,11 +83,11 @@ window.renderAt=function(t){
     const prod=g.querySelector('.prod'), sh=g.querySelector('.shadow');
     const layout=s.layout||'bottom';
     if(prod){
-      let y=layout==='bottom'?300:layout==='right'?260:160, x=layout==='right'?150:0, sc0=layout==='right'?.82:1;
+      let y=layout==='bottom'?250:layout==='right'?260:160, x=layout==='right'?150:0, sc0=layout==='right'?.82:1;
       const z=sc0*(1.0+0.06*lt/d)*(0.86+0.14*pin); const rot=(s.spin||0)*(lt/d-.5);
       prod.style.transform=`translate(${x+(1-pin)*(layout==='right'?300:0)}px,${y+(1-pin)*120+Math.sin(lt*2)*8}px) scale(${z}) rotate(${rot}deg)`;
       prod.style.opacity=pin; prod.style.filter=`blur(${(1-pin)*14}px)`;
-      sh.style.top=(960+y+300*z)+'px'; sh.style.left=`calc(50% + ${x}px)`; sh.style.opacity=pin*.9; sh.style.transform=`scale(${z})`;
+      sh.style.top=(960+y+255*z)+'px'; sh.style.left=`calc(50% + ${x}px)`; sh.style.opacity=pin*.9; sh.style.transform=`scale(${z})`;
       
       const gl=prod.querySelector('.glow'); if(gl){const k=.5+.5*Math.sin(lt*6); const r=300+k*60; gl.style.cssText=`position:absolute;left:50%;top:50%;width:${r*2}px;height:${r*2}px;margin:${-r}px 0 0 ${-r}px;border-radius:50%;background:radial-gradient(closest-side,rgba(226,72,72,${.30+.25*k}),rgba(226,72,72,0));mix-blend-mode:multiply`}
     }
@@ -96,14 +96,14 @@ window.renderAt=function(t){
       const r1=ic.querySelector('.ring'), r2=ic.querySelector('.ring2'); r1.style.transform=`scale(${1+.04*Math.sin(lt*3)})`; r2.style.transform=`scale(${.9+.1*eo(lt/1.2)})`; r2.style.opacity=eo(lt/1.2)}
     const wm=g.querySelector('.wm'); if(wm){const p=eo((lt-.1)/.8); wm.style.opacity=p; wm.style.transform=`translateX(${(1-p)*120}px)`}
     const tx=g.querySelector('.txt'); if(tx){
-      tx.style.top=(layout==='right'?520:300)+'px'; if(layout==='right')tx.style.right='520px';
+      tx.style.top=(layout==='right'?520:430)+'px'; if(layout==='right')tx.style.right='520px';
       const k=tx.querySelector('.kicker'); if(k){k.style.opacity=eo(lt/.4); k.style.transform=`translateY(${(1-eo(lt/.4))*30}px)`}
       tx.querySelectorAll('.word').forEach((w,j)=>{const p=back((lt-0.15-j*0.09)/0.5); w.style.opacity=E((lt-0.15-j*0.09)/0.25); w.style.transform=`translateY(${(1-p)*70}px)`});
       const sb=tx.querySelector('.sub'); if(sb){const p=eo((lt-0.55)/0.5); sb.style.opacity=p; sb.style.transform=`translateY(${(1-p)*30}px)`}
       const nm=tx.querySelector('.num'); if(nm){const p=eo((lt-0.2)/1.2); nm.textContent=Math.round(s.value*p); tx.querySelector('.big').style.transform=`scale(${.9+.1*back((lt-.1)/.6)})`; tx.querySelector('.big').style.transformOrigin='left bottom'}
       tx.querySelectorAll('.badge').forEach((b,j)=>{const p=back((lt-0.5-j*0.18)/0.45); b.style.opacity=E((lt-0.5-j*0.18)/0.2); b.style.transform=`scale(${.6+.4*p})`});
     }
-    const ln=g.querySelector('.line'); if(ln){ln.style.left='72px'; ln.style.top=(layout==='right'?470:250)+'px'; ln.style.width=(eo((lt-.05)/.6)*140)+'px'}
+    const ln=g.querySelector('.line'); if(ln){ln.style.left='130px'; ln.style.top=(layout==='right'?470:385)+'px'; ln.style.width=(eo((lt-.05)/.6)*140)+'px'}
     const ed=g.querySelector('.end'); if(ed){const p=eo(lt/.6); ed.style.opacity=p; const im=ed.querySelector('img'); im.style.transform=`scale(${.7+.3*back(lt/.7)})`; [...ed.children].slice(1).forEach((c,j)=>{const q=eo((lt-.3-j*.15)/.5); c.style.opacity=q; c.style.transform=`translateY(${(1-q)*30}px)`})}
   });
 };
