@@ -1,0 +1,10 @@
+{"tag": "ASENWARE · AW-D125A",
+ "scenes": [
+  {"type": "hero", "dur": 2.8, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "Օրվա ապրանքը", "title": "Շմոլ գազը չի *երևում", "sub": "AW-D125A հասցեական CO դետեկտորը այն չափում է", "spin": 3},
+  {"type": "stat", "dur": 2.5, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "01 · Չափում", "value": 999, "unit": "ppm", "sub": "Չափման միջակայք՝ 0–999 ppm, LCD էկրան", "spin": -3},
+  {"type": "glow", "dur": 2.5, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "02 · Ազդանշան", "title": "3 րոպեի ընթացքում", "sub": "300 ppm-ի դեպքում", "spin": 2},
+  {"type": "stat", "dur": 2.4, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "03 · Սենսոր", "value": 10, "unit": "տարի", "sub": "Սենսորի ծառայության ժամկետը", "spin": -3},
+  {"type": "feature", "dur": 2.4, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "04 · Հասցեական", "title": "Asenware կայանին", "sub": "2-լարային միացում, անսարքության ցուցում", "spin": 3},
+  {"type": "badges", "dur": 2.4, "photo": "2026-11/asenware/D125A_front_w.jpg", "kicker": "Համապատասխանություն", "title": "Եվրոպական *ստանդարտ", "badges": ["EN 50291-1:2018"]},
+  {"type": "end", "dur": 2.8, "title": "Asenware-ի պաշտոնական ներկայացուցիչը Հայաստանում", "phone": "+374 96 112141", "web": "www.telp112.am"}
+ ]}
